@@ -3,6 +3,7 @@ const Kitchen = require("../models/kitchen");
 const Bathroom = require("../models/bathroom");
 const Bedroom = require("../models/bedroom");
 const LivingArea = require("../models/livingArea");
+const Testimonial = require("../models/testimonials");
 
 const {
   GraphQLObjectType,
@@ -62,6 +63,17 @@ const LivingAreaType = new GraphQLObjectType({
   }),
 });
 
+const TestimonialType = new GraphQLObjectType({
+  name: "Testimonial",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    project: { type: GraphQLString },
+    comment: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -103,6 +115,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(LivingAreaType),
       resolve(parent, args) {
         return LivingArea.find({});
+      },
+    },
+    testimonials: {
+      type: new GraphQLList(TestimonialType),
+      resolve(parent, args) {
+        return Testimonial.find({});
       },
     },
   },
@@ -207,6 +225,28 @@ const Mutation = new GraphQLObjectType({
         });
         try {
           return livingArea.save();
+        } catch (e) {
+          console.log(e);
+        }
+      },
+    },
+    addTestimonial: {
+      type: TestimonialType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        project: { type: new GraphQLNonNull(GraphQLString) },
+        comment: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        let testimonial = new Testimonial({
+          name: args.name,
+          email: args.email,
+          project: args.project,
+          comment: args.comment,
+        });
+        try {
+          return testimonial.save();
         } catch (e) {
           console.log(e);
         }

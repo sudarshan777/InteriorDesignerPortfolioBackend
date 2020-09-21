@@ -9,14 +9,13 @@ router.post("/", (req, res, next) => {
   const email = req.body.email;
   const message = req.body.message;
   const subject = req.body.subject;
-
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: creds.USER, // generated ethereal user
-      pass: creds.PASS, // generated ethereal password
+      user: creds.USER,
+      pass: creds.PASS,
     },
     tls: {
       rejectUnauthorized: false,

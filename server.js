@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const sendMailRouter = require("./routes/sendMail");
 const path = require("path");
+require("dotenv").config();
 
 const app = express();
 
@@ -26,8 +27,9 @@ app.use(cors());
 app.use(express.json());
 app.use("/images", express.static("images", options));
 
+const uri = process.env.MONGOLAB_URI;
 mongoose.connect(
-  "mongodb+srv://dbUser:dbUser@cluster0.ejpay.mongodb.net/dbUser?retryWrites=true&w=majority",
+  uri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
