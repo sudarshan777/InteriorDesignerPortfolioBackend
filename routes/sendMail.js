@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const creds = require("../config");
+// const creds = require("../config");
 const nodemailer = require("nodemailer");
 
 router.post("/", (req, res, next) => {
@@ -9,13 +9,15 @@ router.post("/", (req, res, next) => {
   const email = req.body.email;
   const message = req.body.message;
   const subject = req.body.subject;
+  const username = process.env.USER;
+  const password = process.env.PASS;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: creds.USER,
-      pass: creds.PASS,
+      user: username,
+      pass: password,
     },
     tls: {
       rejectUnauthorized: false,

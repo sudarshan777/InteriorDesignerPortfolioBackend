@@ -25,7 +25,7 @@ let options = {
 
 app.use(cors());
 app.use(express.json());
-app.use("/images", express.static("images", options));
+app.use("/images", express.static(path.join(__dirname, 'images'), options));
 
 const uri = process.env.MONGOLAB_URI;
 mongoose.connect(
