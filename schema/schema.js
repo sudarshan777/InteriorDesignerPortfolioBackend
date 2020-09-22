@@ -161,7 +161,7 @@ const Mutation = new GraphQLObjectType({
         let kitchen = new Kitchen({
           name: args.name,
           description: args.description,
-          pictureUrl: `http://localhost:4000/images/kitchen/${args.pictureUrl}`,
+          pictureUrl: `${args.pictureUrl}`,
         });
         try {
           return kitchen.save();
@@ -181,7 +181,7 @@ const Mutation = new GraphQLObjectType({
         let bathroom = new Bathroom({
           name: args.name,
           description: args.description,
-          pictureUrl: `http://localhost:4000/images/bathroom/${args.pictureUrl}`,
+          pictureUrl: `${args.pictureUrl}`,
         });
         try {
           return bathroom.save();
@@ -201,7 +201,7 @@ const Mutation = new GraphQLObjectType({
         let bedroom = new Bedroom({
           name: args.name,
           description: args.description,
-          pictureUrl: `http://localhost:4000/images/bedroom/${args.pictureUrl}`,
+          pictureUrl: `${args.pictureUrl}`,
         });
         try {
           return bedroom.save();
@@ -221,7 +221,7 @@ const Mutation = new GraphQLObjectType({
         let livingArea = new LivingArea({
           name: args.name,
           description: args.description,
-          pictureUrl: `http://localhost:4000/images/livingArea/${args.pictureUrl}`,
+          pictureUrl: `${args.pictureUrl}`,
         });
         try {
           return livingArea.save();
